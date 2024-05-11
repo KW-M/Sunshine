@@ -30,11 +30,11 @@ set -e
 dnf -y update
 dnf -y group install "Development Tools"
 dnf -y install \
-  boost-devel-1.81.0* \
-  cmake-3.27.* \
+  boost-devel-1.83.0* \
+  cmake-3.28.* \
   doxygen \
-  gcc-13.2.* \
-  gcc-c++-13.2.* \
+  gcc-14.1.* \
+  gcc-c++-14.1.* \
   git \
   graphviz \
   libappindicator-gtk3-devel \
