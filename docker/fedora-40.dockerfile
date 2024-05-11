@@ -4,7 +4,7 @@
 # platforms_pr: linux/amd64
 # no-cache-filters: sunshine-base,artifacts,sunshine
 ARG BASE=fedora
-ARG TAG=39
+ARG TAG=40
 FROM ${BASE}:${TAG} AS sunshine-base
 
 FROM sunshine-base as sunshine-build
@@ -122,7 +122,7 @@ cmake \
   -DSUNSHINE_ENABLE_WAYLAND=ON \
   -DSUNSHINE_ENABLE_X11=ON \
   -DSUNSHINE_ENABLE_DRM=ON \
-  -DSUNSHINE_ENABLE_CUDA=ON \
+  -DSUNSHINE_ENABLE_CUDA=OFF \
   /build/sunshine
 make -j "$(nproc)"
 cpack -G RPM
