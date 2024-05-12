@@ -78,28 +78,28 @@ WORKDIR /build/cuda
 ENV CUDA_VERSION="12.4.0"
 ENV CUDA_BUILD="550.54.14"
 # hadolint ignore=SC3010
-RUN <<_INSTALL_CUDA
-#!/bin/bash
-set -e
-cuda_prefix="https://developer.download.nvidia.com/compute/cuda/"
-cuda_suffix=""
-if [[ "${TARGETPLATFORM}" == 'linux/arm64' ]]; then
-  cuda_suffix="_sbsa"
-
-  # patch headers https://bugs.launchpad.net/ubuntu/+source/mumax3/+bug/2032624
-  sed -i 's/__Float32x4_t/int/g' /usr/include/bits/math-vector.h
-  sed -i 's/__Float64x2_t/int/g' /usr/include/bits/math-vector.h
-  sed -i 's/__SVFloat32_t/float/g' /usr/include/bits/math-vector.h
-  sed -i 's/__SVFloat64_t/float/g' /usr/include/bits/math-vector.h
-  sed -i 's/__SVBool_t/int/g' /usr/include/bits/math-vector.h
-fi
-url="${cuda_prefix}${CUDA_VERSION}/local_installers/cuda_${CUDA_VERSION}_${CUDA_BUILD}_linux${cuda_suffix}.run"
-echo "cuda url: ${url}"
-wget "$url" --progress=bar:force:noscroll -q -O ./cuda.run
-chmod a+x ./cuda.run
-./cuda.run --silent --toolkit --toolkitpath=/build/cuda --no-opengl-libs --no-man-page --no-drm
-rm ./cuda.run
-_INSTALL_CUDA
+#RUN <<_INSTALL_CUDA
+##!/bin/bash
+#set -e
+#cuda_prefix="https://developer.download.nvidia.com/compute/cuda/"
+#cuda_suffix=""
+#if [[ "${TARGETPLATFORM}" == 'linux/arm64' ]]; then
+#  cuda_suffix="_sbsa"
+#
+#  # patch headers https://bugs.launchpad.net/ubuntu/+source/mumax3/+bug/2032624
+#  sed -i 's/__Float32x4_t/int/g' /usr/include/bits/math-vector.h
+#  sed -i 's/__Float64x2_t/int/g' /usr/include/bits/math-vector.h
+#  sed -i 's/__SVFloat32_t/float/g' /usr/include/bits/math-vector.h
+#  sed -i 's/__SVFloat64_t/float/g' /usr/include/bits/math-vector.h
+#  sed -i 's/__SVBool_t/int/g' /usr/include/bits/math-vector.h
+#fi
+#url="${cuda_prefix}${CUDA_VERSION}/local_installers/cuda_${CUDA_VERSION}_${CUDA_BUILD}_linux${cuda_suffix}.run"
+#echo "cuda url: ${url}"
+#wget "$url" --progress=bar:force:noscroll -q -O ./cuda.run
+#chmod a+x ./cuda.run
+#./cuda.run --silent --toolkit --toolkitpath=/build/cuda --no-opengl-libs --no-man-page --no-drm
+#rm ./cuda.run
+#_INSTALL_CUDA
 
 # copy repository
 WORKDIR /build/sunshine/
