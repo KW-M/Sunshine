@@ -95,7 +95,7 @@ if [[ "${TARGETPLATFORM}" == 'linux/arm64' ]]; then
 fi
 url="${cuda_prefix}${CUDA_VERSION}/local_installers/cuda_${CUDA_VERSION}_${CUDA_BUILD}_linux${cuda_suffix}.run"
 echo "cuda url: ${url}"
-wget "$url" --progress=bar:force:noscroll -q --show-progress -O ./cuda.run
+wget "$url" --progress=bar:force:noscroll -q -O ./cuda.run
 chmod a+x ./cuda.run
 ./cuda.run --silent --toolkit --toolkitpath=/build/cuda --no-opengl-libs --no-man-page --no-drm
 rm ./cuda.run
